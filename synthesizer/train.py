@@ -221,7 +221,7 @@ def train(run_id: str, syn_dir: str, models_dir: str, save_every: int,
                 k = step // 1000
 
                 
-                msg = f"| Epoch: {epoch}/{epochs} ({i}/{steps_per_epoch}) | Loss: {loss_window.average:#.4} | {1./time_window.average:#.2} steps/s | Step: {k}k | "
+                msg = f"| {time_string()} Epoch: {epoch}/{epochs} ({i}/{steps_per_epoch}) | Loss: {loss_window.average:#.4} | {1./time_window.average:#.2} steps/s | Step: {k}k | "
                 stream(msg)
 
                 if log_every != 0 and step % log_every == 0 :
