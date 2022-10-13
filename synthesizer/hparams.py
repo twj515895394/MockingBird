@@ -2,7 +2,7 @@ import ast
 import pprint
 import json
 
-batch_size=12
+batch_size=32
 class HParams(object):
     def __init__(self, **kwargs): self.__dict__.update(kwargs)
     def __setitem__(self, key, value): setattr(self, key, value)

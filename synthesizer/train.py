@@ -11,7 +11,7 @@ from synthesizer.utils.plot import plot_spectrogram, plot_spectrogram_and_trace
 from synthesizer.utils.symbols import symbols
 from synthesizer.utils.text import sequence_to_text
 from vocoder.display import *
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import json
 import numpy as np
 from pathlib import Path
@@ -21,7 +21,13 @@ import os
 def np_now(x: torch.Tensor): return x.detach().cpu().numpy()
 
 def time_string():
-    return datetime.now().strftime("%Y-%m-%d %H:%M")
+    SHA_TZ = timezone(
+        timedelta(hours=8),
+        name='Asia/Shanghai',
+    )
+    utc_now = datetime.utcnow().replace(tzinfo=timezone.utc)
+    beijing_now = utc_now.astimezone(SHA_TZ)
+    return beijing_now.strftime("%Y-%m-%d %H:%M")
 
 def train(run_id: str, syn_dir: str, models_dir: str, save_every: int,
          backup_every: int, log_every:int, force_restart:bool, hparams):
